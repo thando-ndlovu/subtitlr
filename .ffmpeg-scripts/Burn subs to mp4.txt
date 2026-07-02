@@ -1,0 +1,13 @@
+Get-ChildItem -LiteralPath "[----directory----]" -Filter *.mkv | ForEach-Object {
+    $srtPath = Join-Path $_.DirectoryName "$($_.BaseName).srt"
+    $outputPath = Join-Path $_.DirectoryName "$($_.BaseName).mp4"
+
+    $escapedSrtPath = $srtPath -replace '\\', '/'
+    $escapedSrtPath = $escapedSrtPath -replace ':', '\:'
+
+    if (Test-Path -LiteralPath $srtPath) {
+        ./ffmpeg -i $_.FullName -vf "subtitles='$escapedSrtPath'" -map 0:v -map 0:a -c:v libx264 -preset medium -crf 23 -c:a copy $outputPath
+    } else {
+        Write-Warning "No SRT found for $($_.Name), skipping."
+    }
+}
