@@ -53,8 +53,8 @@ public static class CueMerger
                     case CuePosition.TopRight:
                         top ??= new SubtitleEntry
                         {
-                            Start = baseEntry.Start,
-                            End = baseEntry.End,
+                            Start = spec.Offset?.Add(baseEntry.Start) ?? baseEntry.Start,
+                            End = spec.Offset?.Add(baseEntry.End) ?? baseEntry.End,
                             Lines = [spec.Position switch
                             {
                                 CuePosition.TopLeft => "{\\an7}",
@@ -71,8 +71,8 @@ public static class CueMerger
 
                         bottom ??= new SubtitleEntry
                         {
-                            Start = baseEntry.Start,
-                            End = baseEntry.End,
+                            Start = spec.Offset?.Add(baseEntry.Start) ?? baseEntry.Start,
+                            End = spec.Offset?.Add(baseEntry.End) ?? baseEntry.End,
                             Lines = []
                         };
 
@@ -85,7 +85,11 @@ public static class CueMerger
             if (bottom is not null) result.Add(bottom);
         }
 
-        for (int i = 0; i < result.Count; i++) result[i].Index = i + 1;
+        result = [.. result.OrderBy(_ => _.Start)];
+
+        for (int i = 0; i < result.Count; i++) 
+            result[i].Index = i + 1;
+
         return result;
     }
 

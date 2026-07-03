@@ -9,4 +9,5 @@ public class LanguageLineSpec
     public string LanguageCode { get; set; }
     public bool Romanize { get; set; }
     public CuePosition Position { get; set; }
+    public TimeSpan? Offset { get; set; }
 }

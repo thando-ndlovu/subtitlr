@@ -3,6 +3,7 @@ using Subtitlr.Merging;
 using Subtitlr.Models;
 using Subtitlr.Parsing;
 using Subtitlr.Romanization;
+using System.Text;
 
 namespace SubtitleMerger;
 
@@ -20,6 +21,7 @@ public static class Program
         string? outputDir = null;
         bool recursive = false;
         List<string>? customOrderTokens = null;
+        List<string>? customOrderTokensOffsets = null;
 
         for (int i = 0; i < args.Length; i++)
         {
@@ -34,8 +36,12 @@ public static class Program
                     recursive = true;
                     break;
                 case "--order":
-                    var raw = RequireValue(args, ref i, "--order");
-                    customOrderTokens = [.. raw.Split(',').Select(s => s.Trim()).Where(s => s.Length > 0)];
+                    var order = RequireValue(args, ref i, "--order");
+                    customOrderTokens = [.. order.Split(',').Select(s => s.Trim()).Where(s => s.Length > 0)];
+                    break;
+                case "--offset":
+                    var offset = RequireValue(args, ref i, "--offset");
+                    customOrderTokensOffsets = [.. offset.Split(',').Select(s => s.Trim()).Where(s => s.Length > 0)];
                     break;
                 case "--help":
                 case "-h":
@@ -89,7 +95,7 @@ public static class Program
                 $"({string.Join(", ", group.Files.Select(f => Path.GetFileName(f.Path)))})");
 
             var order = customOrderTokens != null
-                ? ParseOrderTokens(customOrderTokens)
+                ? ParseOrderTokens(customOrderTokens, customOrderTokensOffsets)
                 : BuildDefaultOrder(languagesPresent);
 
             if (order.Count == 0)
@@ -168,10 +174,14 @@ public static class Program
     /// position is omitted, it defaults to Top for every language except
     /// English, which defaults to Bottom.
     /// </summary>
-    private static List<LanguageLineSpec> ParseOrderTokens(List<string> tokens)
+    private static List<LanguageLineSpec> ParseOrderTokens(List<string> tokens, List<string> offsets)
     {
         var result = new List<LanguageLineSpec>();
         const string romanizedSuffix = "-romanized";
+
+        Dictionary<string, TimeSpan> _offsets = offsets
+            .Select(_ => _.Split(':'))
+            .ToDictionary(_ => _[0], _ => TimeSpan.FromMilliseconds(double.Parse(_[1])));
 
         foreach (var raw in tokens)
         {
@@ -191,11 +201,10 @@ public static class Program
 
             bool romanize = t.EndsWith(romanizedSuffix, StringComparison.OrdinalIgnoreCase);
             var lang = romanize ? t[..^romanizedSuffix.Length] : t;
+            var offset = _offsets.TryGetValue(lang, out TimeSpan _timespan) ? _timespan : default;
+            var position = explicitPosition ?? (string.Equals(lang, "en", StringComparison.OrdinalIgnoreCase) ? CuePosition.Bottom : CuePosition.Top);
 
-            var position = explicitPosition ??
-                (string.Equals(lang, "en", StringComparison.OrdinalIgnoreCase) ? CuePosition.Bottom : CuePosition.Top);
-
-            result.Add(new LanguageLineSpec { LanguageCode = lang, Romanize = romanize, Position = position });
+            result.Add(new LanguageLineSpec { LanguageCode = lang, Romanize = romanize, Position = position, Offset = offset });
         }
 
         return result;
@@ -250,10 +259,11 @@ Usage:
 Options:
   -o, --output <dir>   Directory to write merged .srt files into (default: alongside source files)
   -r, --recursive       Recurse into subdirectories when a directory is given
-  --order <spec>        Comma separated line order, e.g. ""ko,ko-romanized,en""
+  --order <spec>        Comma separated line order, e.g. ""ko,ko-romanized:top,en:bottom""
                          Use ""<lang>-romanized"" to request a romanized line for a language.
                          Default: every non-English language (native script, then romanized
-                         if a romanizer is available for it), followed by English last.
+                         if a romanizer is available for it), followed by English last. Value after ':' is a for the position of the subtitle.
+  --offset              Comma separated offset ammounts in milliseconds, e.g. ""ko,ko-romanized:-1000,en:5000""
   -h, --help             Show this help
 
 Language/file grouping:
@@ -266,7 +276,7 @@ Language/file grouping:
 
 Examples:
   SubtitleMerger ./MyShow -r
-  SubtitleMerger ep01.en.srt ep01.ko.srt -o ./out --order ko,ko-romanized,en
+  SubtitleMerger ep01.en.srt ep01.ko.srt -o ./out --order ko:top,ko-romanized:bottom,en --order en:2000
 ");
     }
 }
