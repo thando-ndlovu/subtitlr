@@ -174,12 +174,12 @@ public static class Program
     /// position is omitted, it defaults to Top for every language except
     /// English, which defaults to Bottom.
     /// </summary>
-    private static List<LanguageLineSpec> ParseOrderTokens(List<string> tokens, List<string> offsets)
+    private static List<LanguageLineSpec> ParseOrderTokens(List<string> tokens, List<string>? offsets)
     {
         var result = new List<LanguageLineSpec>();
         const string romanizedSuffix = "-romanized";
 
-        Dictionary<string, TimeSpan> _offsets = offsets
+        Dictionary<string, TimeSpan>? _offsets = offsets?
             .Select(_ => _.Split(':'))
             .ToDictionary(_ => _[0], _ => TimeSpan.FromMilliseconds(double.Parse(_[1])));
 
@@ -201,7 +201,7 @@ public static class Program
 
             bool romanize = t.EndsWith(romanizedSuffix, StringComparison.OrdinalIgnoreCase);
             var lang = romanize ? t[..^romanizedSuffix.Length] : t;
-            var offset = _offsets.TryGetValue(lang, out TimeSpan _timespan) ? _timespan : default;
+            var offset = _offsets is not null && _offsets.TryGetValue(lang, out TimeSpan _timespan) ? _timespan : default;
             var position = explicitPosition ?? (string.Equals(lang, "en", StringComparison.OrdinalIgnoreCase) ? CuePosition.Bottom : CuePosition.Top);
 
             result.Add(new LanguageLineSpec { LanguageCode = lang, Romanize = romanize, Position = position, Offset = offset });
