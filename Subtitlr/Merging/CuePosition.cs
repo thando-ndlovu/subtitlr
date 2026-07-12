@@ -1,5 +1,5 @@
 ﻿
-namespace Subtitlr.Merging
+namespace Subtitlr.Base.Merging
 {
     public enum CuePosition
     {

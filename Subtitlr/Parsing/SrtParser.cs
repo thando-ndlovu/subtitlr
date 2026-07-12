@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
-using Subtitlr.Models;
+using Subtitlr.Base.Models;
 
-namespace Subtitlr.Parsing;
+namespace Subtitlr.Base.Parsing;
 
 /// <summary>
 /// Parses standard SubRip (.srt) files. Tolerant of missing/duplicate index

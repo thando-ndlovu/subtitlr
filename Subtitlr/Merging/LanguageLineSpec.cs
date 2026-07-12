@@ -1,4 +1,4 @@
-namespace Subtitlr.Merging;
+namespace Subtitlr.Base.Merging;
 
 /// <summary>
 /// One line of the final merged cue: which language's text to pull, and

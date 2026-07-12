@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace Subtitlr.Grouping;
+namespace Subtitlr.Base.Grouping;
 
 /// <summary>
 /// Detects a subtitle's language two ways: from a language token embedded in

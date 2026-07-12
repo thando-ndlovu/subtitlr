@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Subtitlr.Romanization;
+namespace Subtitlr.Base.Romanization;
 
 /// <summary>
 /// Converts Hangul text to Latin script following (an approximation of)

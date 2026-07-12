@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<ApplicationManifest>app.manifest</ApplicationManifest>
+		<BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+		<ImplicitUsings>diable</ImplicitUsings>
+		<LangVersion>latest</LangVersion>
+		<Nullable>enable</Nullable>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net10.0</TargetFramework>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<Version>4.0.0</Version>
+	</PropertyGroup>
+	
+	<PropertyGroup>
+		<AvaloniaVersion>11.3.8</AvaloniaVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
+		<PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
+		<PackageReference Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)" />
+		<PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />
+		<PackageReference Include="Tmds.DBus.Protocol" Version="0.94.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Subtitlr.UI\Subtitlr.UI.csproj" />
+	</ItemGroup>
+
+</Project>

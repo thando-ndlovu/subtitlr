@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Subtitlr.CLI/Subtitlr.CLI.csproj" Id="951531e8-b5f7-47ff-a819-5ba38ec46a72" />
+  <Project Path="Subtitlr.UI.Avalonia/Subtitlr.UI.Avalonia.csproj" Id="bf2896b2-a3b3-4d65-b4d2-d6dafd17eebd" />
+  <Project Path="Subtitlr.UI/Subtitlr.UI.csproj" Id="009ae9dd-204e-4102-964e-d97775fc15c7" />
+  <Project Path="Subtitlr/Subtitlr.Base.csproj" Id="793ae8df-5865-4dfc-ad45-d5d7a76af5d6" />
+</Solution>

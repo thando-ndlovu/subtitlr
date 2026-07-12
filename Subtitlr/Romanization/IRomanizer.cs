@@ -1,4 +1,4 @@
-namespace Subtitlr.Romanization;
+namespace Subtitlr.Base.Romanization;
 
 /// <summary>
 /// Converts native-script text for one language into Latin-script text.

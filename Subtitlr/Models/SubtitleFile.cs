@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Subtitlr.Models;
+namespace Subtitlr.Base.Models;
 
 /// <summary>
 /// One subtitle file on disk: its path, the language it was detected as,

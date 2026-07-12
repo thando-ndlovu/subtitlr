@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Subtitlr.Models;
+namespace Subtitlr.Base.Models;
 
 public enum SubtitleFormat
 {

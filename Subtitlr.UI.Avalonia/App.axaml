@@ -1,0 +1,14 @@
+﻿<Application 
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	Name="Subtitlr"
+	RequestedThemeVariant="Default"
+	x:Class="Subtitlr.UI.Avalonia.App">
+    <Application.Resources>
+        <x:Double x:Key="ControlContentThemeFontSize">14</x:Double>
+        <FontFamily x:Key="ContentControlThemeFontFamily">Cascadia Code,SF Mono,DejaVu Sans Mono,Menlo,Consolas</FontFamily>
+    </Application.Resources>
+    <Application.Styles>
+        <FluentTheme />
+    </Application.Styles>
+</Application>

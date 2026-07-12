@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
-using Subtitlr.Models;
+using Subtitlr.Base.Models;
 
-namespace Subtitlr.Parsing;
+namespace Subtitlr.Base.Parsing;
 
 public class SrtWriter : ISubtitleWriter
 {

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Subtitlr.Romanization;
+namespace Subtitlr.Base.Romanization;
 
 /// <summary>
 /// Add an entry here whenever a new IRomanizer is implemented for another

@@ -1,3 +1,11 @@
 .vs/
-bin/
-obj/
+Subtitlr/bin
+Subtitlr/obj
+Subtitlr.Base/bin
+Subtitlr.Base/obj
+Subtitlr.CLI/bin
+Subtitlr.CLI/obj
+Subtitlr.UI/bin
+Subtitlr.UI/obj
+Subtitlr.UI.Avalonia/bin
+Subtitlr.UI.Avalonia/obj

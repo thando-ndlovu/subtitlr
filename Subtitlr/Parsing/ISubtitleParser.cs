@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Subtitlr.Models;
+using Subtitlr.Base.Models;
 
-namespace Subtitlr.Parsing;
+namespace Subtitlr.Base.Parsing;
 
 public interface ISubtitleParser
 {

@@ -1,12 +1,12 @@
-using Subtitlr.Grouping;
-using Subtitlr.Merging;
-using Subtitlr.Models;
-using Subtitlr.Parsing;
-using Subtitlr.Romanization;
-using System.Text;
+using Subtitlr.Base.Grouping;
+using Subtitlr.Base.Merging;
+using Subtitlr.Base.Models;
+using Subtitlr.Base.Parsing;
+using Subtitlr.Base.Romanization;
 
-namespace SubtitleMerger;
+using System.Collections.Generic;
 
+namespace Subtitlr.CLI;
 public static class Program
 {
     public static int Main(string[] args)

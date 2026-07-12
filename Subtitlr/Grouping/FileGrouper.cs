@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Subtitlr.Models;
+using Subtitlr.Base.Models;
 
-namespace Subtitlr.Grouping;
+namespace Subtitlr.Base.Grouping;
 
 /// <summary>
 /// Groups a flat list of subtitle file paths into SubtitleFileGroups: sets of

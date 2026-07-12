@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Subtitlr.Models;
+namespace Subtitlr.Base.Models;
 
 /// <summary>
 /// A single timed subtitle cue. One or more text lines (e.g. one per language)

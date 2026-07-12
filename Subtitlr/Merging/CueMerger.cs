@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Subtitlr.Models;
-using Subtitlr.Romanization;
+using Subtitlr.Base.Models;
+using Subtitlr.Base.Romanization;
 
-namespace Subtitlr.Merging;
+namespace Subtitlr.Base.Merging;
 
 /// <summary>
 /// Combines every language's cues for a group into a single timeline. Times
